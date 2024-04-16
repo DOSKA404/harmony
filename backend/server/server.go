@@ -11,7 +11,7 @@ import (
 func Server() {
 	fmt.Println("server starting on port 8080")
 	r := mux.NewRouter()
-	r.HandleFunc("/AccountGet", handler.AccountGet).Methods("GET")
+	r.HandleFunc("/AccountGet", handler.Test).Methods("GET")
 
 	http.ListenAndServe(":8080", r)
 }

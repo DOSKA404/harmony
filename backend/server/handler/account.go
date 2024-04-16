@@ -1,18 +1,17 @@
 package handler
 
 import (
-	"encoding/json"
 	"net/http"
 )
 
-func AccountGet(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
-		return
-	}
+func AccountConnected(w http.ResponseWriter, r *http.Request) {
+	// renvoi le comptes connecté
+}
 
-	response := map[string]string{"message": "Hello World"}
+func Registered(w http.ResponseWriter, r *http.Request) {
+	// creer un compte a l'inscription
+}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(response)
+func Login(w http.ResponseWriter, r *http.Request) {
+	// connecte un compte
 }
