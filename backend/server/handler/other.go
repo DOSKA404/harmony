@@ -48,3 +48,7 @@ func LikeArtist(w http.ResponseWriter, r *http.Request) {
 func DislikeArtist(w http.ResponseWriter, r *http.Request) {
 	//ajoute un artiste a la liste des artistes non aimées
 }
+
+func PostMainPageMusic(w http.ResponseWriter, r *http.Request) {
+	//renvoi les musics de la page principale
+}
