@@ -1,5 +1,7 @@
 package main
 
-func main() {
+import "backend/server"
 
+func main() {
+	server.Server()
 }
