@@ -1,53 +1,54 @@
 package data
 
-type music struct {
-	id          int
-	name        string
-	artist      artist
-	album       album
-	year        int
-	genre       []genre
-	length      int
-	youtubePath string
-	score       int
+type Music struct {
+	Id          int
+	Name        string
+	ArtistId    int
+	AlbumId     int
+	Genre       []Genre
+	YoutubePath string
+	Score       int
 }
 
-type playlist struct {
-	id       int
-	name     string
-	music    []music
-	genre    []genre
-	musicNum int
+type Playlist struct {
+	Id    int
+	Name  string
+	Music []Music
+	Genre []Genre
 }
 
-type album struct {
-	id       int
-	name     string
-	artist   string
-	music    []music
-	genre    []genre
-	musicNum int
+type Album struct {
+	Id          int
+	Name        string
+	ArtistId    int
+	Genre       []Genre
+	YoutubePath string
+	Score       int
 }
 
-type artist struct {
-	id       int
-	name     string
-	music    []music
-	genre    []genre
-	musicNum int
-	album    []album
-	albumNum int
-	score    int
+type Artist struct {
+	Id    int
+	Name  string
+	Score int
+	Genre []Genre
 }
 
-type genre struct {
-	id    int
-	name  string
-	score int
+type Genre struct {
+	Id    int
+	Name  string
+	Score int
 }
 
-type account struct {
-	id       int
-	username string
-	password string
+type Account struct {
+	Id       int
+	Username string
+	Password string
 }
+
+var AllAlbums []Album
+
+var AllArtists []Artist
+
+var AllGenres []Genre
+
+var AllMusic []Music
