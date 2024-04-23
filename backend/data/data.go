@@ -43,6 +43,11 @@ type artist struct {
 type genre struct {
 	id    int
 	name  string
-	genre []genre
 	score int
+}
+
+type account struct {
+	id       int
+	username string
+	password string
 }

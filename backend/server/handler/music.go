@@ -4,10 +4,18 @@ import (
 	"net/http"
 )
 
-func GetMusicByName(w http.ResponseWriter, r *http.Request)
+func GetMusicByName(w http.ResponseWriter, r *http.Request) {
+	//recupere le nom de la music
+}
 
-//recupere le nom de la music
+func PostMusic(w http.ResponseWriter, r *http.Request) {
+	//evoi la bonne music
+}
 
-func PostMusic(w http.ResponseWriter, r *http.Request)
+func LikeMusic(w http.ResponseWriter, r *http.Request) {
+	//ajoute une music a la liste des musics aimées
+}
 
-//evoi la bonne music
+func DislikeMusic(w http.ResponseWriter, r *http.Request) {
+	//ajoute une music a la liste des musics non aimées
+}

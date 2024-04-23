@@ -33,14 +33,6 @@ func PostArtistByGenre(w http.ResponseWriter, r *http.Request) {
 	//renvoi les artistes d'un genre precis
 }
 
-func LikeMusic(w http.ResponseWriter, r *http.Request) {
-	//ajoute une music a la liste des musics aimées
-}
-
-func DislikeMusic(w http.ResponseWriter, r *http.Request) {
-	//ajoute une music a la liste des musics non aimées
-}
-
 func LikeArtist(w http.ResponseWriter, r *http.Request) {
 	//ajoute un artiste a la liste des artistes aimées
 }
