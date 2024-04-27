@@ -1,31 +1,31 @@
-INSERT INTO "album" ("id", "name", "artistId") VALUES
+INSERT INTO "album" ("id", "name", "artisteId") VALUES
 ('1', 'the eminem show', '1');
 
-INSERT INTO "album" ("id", "name", "artistId") VALUES
+INSERT INTO "album" ("id", "name", "artisteId") VALUES
 ('2', 'the infamous', '2');
 
-INSERT INTO "album" ("id", "name", "artistId") VALUES
+INSERT INTO "album" ("id", "name", "artisteId") VALUES
 ('3', 'the predator', '3');
 
-INSERT INTO "album" ("id", "name", "artistId") VALUES
+INSERT INTO "album" ("id", "name", "artisteId") VALUES
 ('4', 'lethal injection', '3');
 
-INSERT INTO "album" ("id", "name", "artistId") VALUES
+INSERT INTO "album" ("id", "name", "artisteId") VALUES
 ('5', 'a night at the opera', '4');
 
-INSERT INTO "album" ("id", "name", "artistId") VALUES
+INSERT INTO "album" ("id", "name", "artisteId") VALUES
 ('6', 'back in black', '5');
 
-INSERT INTO "album" ("id", "name", "artistId") VALUES
+INSERT INTO "album" ("id", "name", "artisteId") VALUES
 ('7', 'love at first sting', '6');
 
-INSERT INTO "album" ("id", "name", "artistId") VALUES
+INSERT INTO "album" ("id", "name", "artisteId") VALUES
 ('8', 'blurryface', '7');
 
-INSERT INTO "album" ("id", "name", "artistId") VALUES
+INSERT INTO "album" ("id", "name", "artisteId") VALUES
 ('9', 'what a wonderfull world', '8');
 
-INSERT INTO "album" ("id", "name", "artistId") VALUES
+INSERT INTO "album" ("id", "name", "artisteId") VALUES
 ('10', 'greatest hit', '9');
 
 INSERT INTO "artist" ("id", "name") VALUES
@@ -97,34 +97,34 @@ INSERT INTO "genreLinkAlbum" ("id", "albumId", "genreId") VALUES
 INSERT INTO "genreLinkAlbum" ("id", "albumId", "genreId") VALUES
 ('11', '10', '3');
 
-INSERT INTO "genreLinkArtist" ("id", "artistId", "genreId") VALUES
+INSERT INTO "genreLinkArtist" ("id", "artisteId", "genreId") VALUES
 ('1', '1', '1');
 
-INSERT INTO "genreLinkArtist" ("id", "artistId", "genreId") VALUES
+INSERT INTO "genreLinkArtist" ("id", "artisteId", "genreId") VALUES
 ('2', '2', '1');
 
-INSERT INTO "genreLinkArtist" ("id", "artistId", "genreId") VALUES
+INSERT INTO "genreLinkArtist" ("id", "artisteId", "genreId") VALUES
 ('3', '3', '1');
 
-INSERT INTO "genreLinkArtist" ("id", "artistId", "genreId") VALUES
+INSERT INTO "genreLinkArtist" ("id", "artisteId", "genreId") VALUES
 ('4', '4', '2');
 
-INSERT INTO "genreLinkArtist" ("id", "artistId", "genreId") VALUES
+INSERT INTO "genreLinkArtist" ("id", "artisteId", "genreId") VALUES
 ('5', '5', '2');
 
-INSERT INTO "genreLinkArtist" ("id", "artistId", "genreId") VALUES
+INSERT INTO "genreLinkArtist" ("id", "artisteId", "genreId") VALUES
 ('6', '6', '2');
 
-INSERT INTO "genreLinkArtist" ("id", "artistId", "genreId") VALUES
+INSERT INTO "genreLinkArtist" ("id", "artisteId", "genreId") VALUES
 ('7', '7', '1');
 
-INSERT INTO "genreLinkArtist" ("id", "artistId", "genreId") VALUES
+INSERT INTO "genreLinkArtist" ("id", "artisteId", "genreId") VALUES
 ('8', '7', '2');
 
-INSERT INTO "genreLinkArtist" ("id", "artistId", "genreId") VALUES
+INSERT INTO "genreLinkArtist" ("id", "artisteId", "genreId") VALUES
 ('9', '8', '3');
 
-INSERT INTO "genreLinkArtist" ("id", "artistId", "genreId") VALUES
+INSERT INTO "genreLinkArtist" ("id", "artisteId", "genreId") VALUES
 ('10', '9', '3');
 
 INSERT INTO "genreLinkMusic" ("id", "musicId", "genreId") VALUES
