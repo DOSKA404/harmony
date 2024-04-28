@@ -22,7 +22,6 @@ function Home() {
           </Heading>
           <SimpleGrid columns={3} spacing={10} w="full" px={10} py={5}>
             <Box bgGradient="linear(to-r, #333333, #1a1a1a)" p={10} borderRadius="lg" boxShadow="xl">
-              <Image src="/artist-bg.jpg" alt="Artist Background" borderRadius="lg" mb={4} />
               <Heading mb={2} size="md" color="white">Artiste</Heading>
               <Text color="whiteAlpha.800">Découvrez des artistes de tous genres et horizons.</Text>
               <NextLink href="/artists" passHref>
@@ -30,7 +29,6 @@ function Home() {
               </NextLink>
             </Box>
             <Box bgGradient="linear(to-r, #333333, #1a1a1a)" p={10} borderRadius="lg" boxShadow="xl">
-              <Image src="/music-bg.jpg" alt="Music Background" borderRadius="lg" mb={4} />
               <Heading mb={2} size="md" color="white">Musique</Heading>
               <Text color="whiteAlpha.800">Parcourez notre vaste bibliothèque musicale.</Text>
               <NextLink href="/music" passHref>
@@ -38,7 +36,6 @@ function Home() {
               </NextLink>
             </Box>
             <Box bgGradient="linear(to-r, #333333, #1a1a1a)" p={10} borderRadius="lg" boxShadow="xl">
-              <Image src="/album-bg.jpg" alt="Album Background" borderRadius="lg" mb={4} />
               <Heading mb={2} size="md" color="white">Album</Heading>
               <Text color="whiteAlpha.800">Trouvez les derniers albums de vos artistes préférés.</Text>
               <NextLink href="/albums" passHref>
