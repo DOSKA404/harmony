@@ -3,7 +3,7 @@ package data
 type Music struct {
 	Id          int
 	Name        string
-	ArtistId    int
+	ArtisteId   int
 	AlbumId     int
 	Genre       []Genre
 	YoutubePath string
@@ -20,7 +20,7 @@ type Playlist struct {
 type Album struct {
 	Id          int
 	Name        string
-	ArtistId    int
+	ArtisteId   int
 	Genre       []Genre
 	YoutubePath string
 	Score       int
@@ -52,3 +52,9 @@ var AllArtists []Artist
 var AllGenres []Genre
 
 var AllMusic []Music
+
+type Recommendations struct {
+	Music  [4]Music
+	Album  [4]Album
+	Artist [4]Artist
+}

@@ -15,3 +15,7 @@ func Registered(w http.ResponseWriter, r *http.Request) {
 func Login(w http.ResponseWriter, r *http.Request) {
 	// connecte un compte
 }
+
+func InitScore(accountId int) {
+
+}
