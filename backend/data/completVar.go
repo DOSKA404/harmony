@@ -2,20 +2,15 @@ package data
 
 import (
 	"database/sql"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
-func OpenDb() (db *sql.DB) {
+func InitMusic(accountId int) {
 	db, err := sql.Open("sqlite3", "/db/data.sqlite")
 	if err != nil {
 		panic(err)
 	}
-
-	defer db.Close()
-	return db
-}
-
-func InitMusic(accountId int) {
-	db := OpenDb()
 
 	row, err := db.Query("SELECT id  FROM music")
 	if err != nil {
