@@ -2,7 +2,6 @@ package data
 
 import (
 	"database/sql"
-	"fmt"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -94,6 +93,8 @@ func InitMusic(accountId int) {
 		AllGenres = append(AllGenres, genre)
 	}
 
+	var AllMusicId []int
+	var AllGenresId []int
 	row, err = db.Query("SELECT id, musicId,genreId  FROM genreLinkMusic")
 	if err != nil {
 		panic(err)
@@ -106,10 +107,15 @@ func InitMusic(accountId int) {
 		if err != nil {
 			panic(err)
 		}
-		fmt.Println(musicId, genreId)
-		AllMusic[musicId].Genre = append(AllMusic[musicId].Genre, AllGenres[genreId])
+		AllMusicId = append(AllMusicId, musicId)
+		AllGenresId = append(AllGenresId, genreId)
 
 	}
+	for i, musicId := range AllMusicId {
+		AllMusic[musicId-1].Genre = append(AllMusic[musicId-1].Genre, AllGenresId[i])
+	}
+	var AllAlbumId []int
+	AllGenresId = nil
 	row, err = db.Query("SELECT id, albumId,genreId  FROM genreLinkAlbum")
 	if err != nil {
 		panic(err)
@@ -122,8 +128,15 @@ func InitMusic(accountId int) {
 		if err != nil {
 			panic(err)
 		}
-		AllAlbums[albumId].Genre = append(AllAlbums[albumId].Genre, AllGenres[genreId])
+		AllAlbumId = append(AllAlbumId, albumId)
+		AllGenresId = append(AllGenresId, genreId)
 	}
+	for i, albumId := range AllAlbumId {
+		AllAlbums[albumId-1].Genre = append(AllAlbums[albumId-1].Genre, AllGenresId[i])
+	}
+
+	var AllArtisteId []int
+	AllGenresId = nil
 	row, err = db.Query("SELECT id, artisteId,genreId  FROM genreLinkArtist")
 	if err != nil {
 		panic(err)
@@ -136,7 +149,11 @@ func InitMusic(accountId int) {
 		if err != nil {
 			panic(err)
 		}
-		AllArtists[artisteId].Genre = append(AllArtists[artisteId].Genre, AllGenres[genreId])
+		AllArtisteId = append(AllArtisteId, artisteId)
+		AllGenresId = append(AllGenresId, genreId)
+	}
+	for i, artistId := range AllArtisteId {
+		AllArtists[artistId-1].Genre = append(AllArtists[artistId-1].Genre, AllGenresId[i])
 	}
 
 	row, err = db.Query("SELECT musicId ,score FROM scoreMusic WHERE accountId = ?", accountId)
@@ -150,9 +167,9 @@ func InitMusic(accountId int) {
 		if err != nil {
 			panic(err)
 		}
-		AllMusic[musicId].Score = score
+		AllMusic[musicId-1].Score = score
 	}
-	row, err = db.Query("SELECT albumId ,score FROM albumMusic WHERE accountId = ?", accountId)
+	row, err = db.Query("SELECT albumId ,score FROM scoreAlbum WHERE accountId = ?", accountId)
 	if err != nil {
 		panic(err)
 	}
@@ -163,9 +180,9 @@ func InitMusic(accountId int) {
 		if err != nil {
 			panic(err)
 		}
-		AllAlbums[albumId].Score = score
+		AllAlbums[albumId-1].Score = score
 	}
-	row, err = db.Query("SELECT artisteId ,score FROM scoreArtist WHERE accountId =?", accountId)
+	row, err = db.Query("SELECT artisteId ,score FROM scoreArtiste WHERE accountId =?", accountId)
 	if err != nil {
 		panic(err)
 	}
@@ -176,7 +193,7 @@ func InitMusic(accountId int) {
 		if err != nil {
 			panic(err)
 		}
-		AllArtists[artisteId].Score = score
+		AllArtists[artisteId-1].Score = score
 	}
 	row, err = db.Query("SELECT genreId ,score FROM scoreGenre WHERE accountId =?", accountId)
 	if err != nil {
@@ -189,6 +206,6 @@ func InitMusic(accountId int) {
 		if err != nil {
 			panic(err)
 		}
-		AllGenres[genreId].Score = score
+		AllGenres[genreId-1].Score = score
 	}
 }
