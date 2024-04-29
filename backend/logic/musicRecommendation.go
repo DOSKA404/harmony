@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-func recommendation(accountId int) data.Recommendations {
+func Recommendation(accountId int) data.Recommendations {
 	data.InitMusic(accountId)
 	var bestMusic [4]data.Music
 	var bestAlbum [4]data.Album

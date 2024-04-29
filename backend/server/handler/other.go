@@ -1,8 +1,10 @@
 package handler
 
 import (
+	logic "backend/logic"
 	"encoding/json"
 	"net/http"
+	"strconv"
 )
 
 func Test(w http.ResponseWriter, r *http.Request) {
@@ -42,5 +44,33 @@ func DislikeArtist(w http.ResponseWriter, r *http.Request) {
 }
 
 func PostMainPageMusic(w http.ResponseWriter, r *http.Request) {
-	//renvoi les musics de la page principale
+
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+
+	accountId := r.FormValue("id")
+	accountIdInt, err := strconv.Atoi(accountId)
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+	recomendation := logic.Recommendation(accountIdInt)
+
+	jsonBytes, err := json.Marshal(recomendation)
+	if err != nil {
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonBytes)
 }
