@@ -4,14 +4,13 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-
-	_ "github.com/mattn/go-sqlite3"
 )
 
 func AddAccount(username string, password string) (Account, error) {
 	var account Account
-	db, err := sql.Open("sqlite3", "data.sqlite")
+	db, err := sql.Open("sqlite3", "db/data.sqlite")
 	if err != nil {
+		fmt.Println("ici", err)
 		return Account{}, err
 	}
 	defer db.Close()
@@ -21,7 +20,6 @@ func AddAccount(username string, password string) (Account, error) {
 		fmt.Println("ici", err)
 		return Account{}, err
 	}
-	defer row.Close()
 
 	for row.Next() {
 		var name string
@@ -33,7 +31,7 @@ func AddAccount(username string, password string) (Account, error) {
 		}
 	}
 
-	stmt, err := db.Prepare("INSERT INTO Account (username, password) VALUES (?,?)")
+	stmt, err := db.Prepare("INSERT INTO account (username, password) VALUES (?,?)")
 	if err != nil {
 		return Account{}, err
 	}
@@ -67,7 +65,7 @@ func AddAccount(username string, password string) (Account, error) {
 }
 
 func InitScore(accountId int) {
-	db, err := sql.Open("sqlite3", "data.sqlite")
+	db, err := sql.Open("sqlite3", "db/data.sqlite")
 	if err != nil {
 		panic(err)
 	}
@@ -157,7 +155,7 @@ func InitScore(accountId int) {
 
 func VerifAccount(username string, password string) (Account, error) {
 	var account Account
-	db, err := sql.Open("sqlite3", "data.sqlite")
+	db, err := sql.Open("sqlite3", "db/data.sqlite")
 	if err != nil {
 		panic(err)
 	}

@@ -1,11 +1,13 @@
 package logic
 
-import (
-	data "backend/data"
-)
+import "database/sql"
 
 func addScore(musicId int, scoreToAdd int) {
-	db := data.OpenDb()
+	db, err := sql.Open("sqlite3", "db/data.sqlite")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer db.Close()
 
 	stmt, err := db.Prepare("UPDATE ScoreMusic SET score = score +? WHERE musicId =?")
 	if err != nil {
@@ -20,7 +22,11 @@ func addScore(musicId int, scoreToAdd int) {
 }
 
 func removeScore(musicId int, scoreToRemove int) {
-	db := data.OpenDb()
+	db, err := sql.Open("sqlite3", "db/data.sqlite")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer db.Close()
 
 	stmt, err := db.Prepare("UPDATE ScoreMusic SET score = score -? WHERE musicId =?")
 	if err != nil {
