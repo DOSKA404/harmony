@@ -36,9 +36,9 @@ export default function Header() {
     />
   </Flex>
   <Flex align="center">
-    <NextLink href="/Articles" passHref>
+    <NextLink href="/Browse" passHref>
       <Button as="a" variant="ghost" backgroundColor="#47A8BD" mr={10}>
-        Mes musiques
+        Parcourir
       </Button>
     </NextLink>
     <NextLink href="/Register" passHref>
