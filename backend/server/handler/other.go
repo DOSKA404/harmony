@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"backend/data"
 	logic "backend/logic"
 	"encoding/json"
 	"net/http"
@@ -63,6 +64,135 @@ func PostMainPageMusic(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	recomendation := logic.Recommendation(accountIdInt)
+
+	jsonBytes, err := json.Marshal(recomendation)
+	if err != nil {
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonBytes)
+}
+
+func PostArtist(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+
+	accountId := r.FormValue("id")
+	accountIdInt, err := strconv.Atoi(accountId)
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+	data.InitMusic(accountIdInt)
+	recomendation := data.AllArtists
+
+	jsonBytes, err := json.Marshal(recomendation)
+	if err != nil {
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonBytes)
+}
+
+func PostAlbum(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+
+	accountId := r.FormValue("id")
+	accountIdInt, err := strconv.Atoi(accountId)
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+	data.InitMusic(accountIdInt)
+	recomendation := data.AllAlbums
+
+	jsonBytes, err := json.Marshal(recomendation)
+	if err != nil {
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonBytes)
+	//renvoi les albums
+}
+
+func PostMusic(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+
+	accountId := r.FormValue("id")
+	accountIdInt, err := strconv.Atoi(accountId)
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+	data.InitMusic(accountIdInt)
+	recomendation := data.AllMusic
+
+	jsonBytes, err := json.Marshal(recomendation)
+	if err != nil {
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonBytes)
+}
+
+func PostGenre(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+
+	accountId := r.FormValue("id")
+	accountIdInt, err := strconv.Atoi(accountId)
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+	data.InitMusic(accountIdInt)
+	recomendation := data.AllGenres
 
 	jsonBytes, err := json.Marshal(recomendation)
 	if err != nil {

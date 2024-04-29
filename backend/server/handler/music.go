@@ -8,10 +8,6 @@ func GetMusicByName(w http.ResponseWriter, r *http.Request) {
 	//recupere le nom de la music
 }
 
-func PostMusic(w http.ResponseWriter, r *http.Request) {
-	//evoi la bonne music
-}
-
 func LikeMusic(w http.ResponseWriter, r *http.Request) {
 	//ajoute une music a la liste des musics aimées
 }

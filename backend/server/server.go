@@ -15,6 +15,10 @@ func Server() {
 	r.HandleFunc("/Register", handler.Register).Methods("POST")
 	r.HandleFunc("/Login", handler.Login).Methods("POST")
 	r.HandleFunc("/Recommendation", handler.PostMainPageMusic).Methods("POST")
+	r.HandleFunc("/Artist", handler.PostArtist).Methods("POST")
+	r.HandleFunc("/Music", handler.PostMusic).Methods("POST")
+	r.HandleFunc("/Album", handler.PostAlbum).Methods("POST")
+	r.HandleFunc("/Genre", handler.PostGenre).Methods("POST")
 
 	http.ListenAndServe(":8080", r)
 }
