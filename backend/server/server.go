@@ -23,5 +23,12 @@ func Server() {
 	r.HandleFunc("/ArtistContent", handler.ArtistContent).Methods("POST")
 	r.HandleFunc("/Search", handler.SearchBars).Methods("POST")
 
+	r.HandleFunc("/LikeArtist", handler.LikeArtist).Methods("POST")
+	r.HandleFunc("/DislikeArtist", handler.DislikeArtist).Methods("POST")
+	r.HandleFunc("/LikeAlbum", handler.LikeAlbum).Methods("POST")
+	r.HandleFunc("/DislikeAlbum", handler.DislikeAlbum).Methods("POST")
+	r.HandleFunc("/LikeMusic", handler.LikeMusic).Methods("POST")
+	r.HandleFunc("/DislikeMusic", handler.DislikeMusic).Methods("POST")
+
 	http.ListenAndServe(":8080", r)
 }

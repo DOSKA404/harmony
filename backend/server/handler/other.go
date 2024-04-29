@@ -36,14 +36,6 @@ func PostArtistByGenre(w http.ResponseWriter, r *http.Request) {
 	//renvoi les artistes d'un genre precis
 }
 
-func LikeArtist(w http.ResponseWriter, r *http.Request) {
-	//ajoute un artiste a la liste des artistes aimées
-}
-
-func DislikeArtist(w http.ResponseWriter, r *http.Request) {
-	//ajoute un artiste a la liste des artistes non aimées
-}
-
 func PostMainPageMusic(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method != http.MethodPost {
@@ -294,4 +286,143 @@ func SearchBars(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonBytes)
+}
+
+func LikeArtist(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+
+	artistId := r.FormValue("artistId")
+	artistIdInt, err := strconv.Atoi(artistId)
+	accoyntId := r.FormValue("accountId")
+	accountIdInt, err := strconv.Atoi(accoyntId)
+
+	data.LikeArtist(artistIdInt, accountIdInt)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
+}
+
+func DislikeArtist(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+
+	artistId := r.FormValue("artistId")
+	artistIdInt, err := strconv.Atoi(artistId)
+	accoyntId := r.FormValue("accountId")
+	accountIdInt, err := strconv.Atoi(accoyntId)
+
+	data.DislikeArtist(artistIdInt, accountIdInt)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+}
+
+func LikeAlbum(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+
+	albumId := r.FormValue("albumId")
+	albumIdInt, err := strconv.Atoi(albumId)
+	accoyntId := r.FormValue("accountId")
+	accountIdInt, err := strconv.Atoi(accoyntId)
+
+	data.LikeAlbum(albumIdInt, accountIdInt)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+}
+
+func DislikeAlbum(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+
+	albumId := r.FormValue("albumId")
+	albumIdInt, err := strconv.Atoi(albumId)
+	accoyntId := r.FormValue("accountId")
+	accountIdInt, err := strconv.Atoi(accoyntId)
+
+	data.DislikeAlbum(albumIdInt, accountIdInt)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+}
+
+func LikeMusic(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+
+	musicId := r.FormValue("musicId")
+	musicIdInt, err := strconv.Atoi(musicId)
+	accountId := r.FormValue("accountId")
+	accountIdInt, err := strconv.Atoi(accountId)
+
+	data.LikeMusic(musicIdInt, accountIdInt)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+}
+
+func DislikeMusic(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+
+	musicId := r.FormValue("musicId")
+	musicIdInt, err := strconv.Atoi(musicId)
+	accoyntId := r.FormValue("accountId")
+	accountIdInt, err := strconv.Atoi(accoyntId)
+
+	data.DislikeMusic(musicIdInt, accountIdInt)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 }
