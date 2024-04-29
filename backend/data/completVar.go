@@ -7,7 +7,7 @@ import (
 )
 
 func InitMusic(accountId int) {
-	db, err := sql.Open("sqlite3", "/db/data.sqlite")
+	db, err := sql.Open("sqlite3", "data.sqlite")
 	if err != nil {
 		panic(err)
 	}

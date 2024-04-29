@@ -10,7 +10,7 @@ import (
 
 func AddAccount(username string, password string) (Account, error) {
 	var account Account
-	db, err := sql.Open("sqlite3", "/db/data.sqlite")
+	db, err := sql.Open("sqlite3", "data.sqlite")
 	if err != nil {
 		return Account{}, err
 	}
@@ -67,10 +67,11 @@ func AddAccount(username string, password string) (Account, error) {
 }
 
 func InitScore(accountId int) {
-	db, err := sql.Open("sqlite3", "/db/data.sqlite")
+	db, err := sql.Open("sqlite3", "data.sqlite")
 	if err != nil {
 		panic(err)
 	}
+	defer db.Close()
 
 	row, err := db.Query("SELECT id, name, artisteId, albumId, youtubePath  FROM music")
 	if err != nil {
@@ -156,7 +157,7 @@ func InitScore(accountId int) {
 
 func VerifAccount(username string, password string) (Account, error) {
 	var account Account
-	db, err := sql.Open("sqlite3", "/db/data.sqlite")
+	db, err := sql.Open("sqlite3", "data.sqlite")
 	if err != nil {
 		panic(err)
 	}
