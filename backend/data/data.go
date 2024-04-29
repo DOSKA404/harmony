@@ -42,7 +42,6 @@ type Genre struct {
 type Account struct {
 	Id       int
 	Username string
-	Password string
 }
 
 var AllAlbums []Album
