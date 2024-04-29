@@ -5,7 +5,7 @@ type Music struct {
 	Name        string
 	ArtisteId   int
 	AlbumId     int
-	Genre       []Genre
+	Genre       []int
 	YoutubePath string
 	Score       int
 }
@@ -14,14 +14,14 @@ type Playlist struct {
 	Id    int
 	Name  string
 	Music []Music
-	Genre []Genre
+	Genre []int
 }
 
 type Album struct {
 	Id          int
 	Name        string
 	ArtisteId   int
-	Genre       []Genre
+	Genre       []int
 	YoutubePath string
 	Score       int
 }
@@ -30,7 +30,7 @@ type Artist struct {
 	Id    int
 	Name  string
 	Score int
-	Genre []Genre
+	Genre []int
 }
 
 type Genre struct {
@@ -56,4 +56,10 @@ type Recommendations struct {
 	Music  [4]Music
 	Album  [4]Album
 	Artist [4]Artist
+}
+
+type ReturnStruct struct {
+	Music  []Music
+	Album  []Album
+	Artist []Artist
 }
