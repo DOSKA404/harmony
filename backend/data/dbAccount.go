@@ -61,94 +61,123 @@ func AddAccount(username string, password string) (Account, error) {
 		}
 	}
 
+	InitScore(account.Id)
+
 	return account, nil
 }
 
 func InitScore(accountId int) {
+	fmt.Print("InitScore")
 	db, err := sql.Open("sqlite3", "db/data.sqlite")
 	if err != nil {
 		panic(err)
 	}
 	defer db.Close()
 
-	row, err := db.Query("SELECT id, name, artisteId, albumId, youtubePath  FROM music")
+	var music []int
+	row, err := db.Query("SELECT id FROM music")
 	if err != nil {
 		panic(err)
 	}
 	for row.Next() {
+
 		var id int
-		var name string
-		var artisteId int
-		var albumId int
-		var youtubePath string
-		err = row.Scan(&id, &name, &artisteId, &albumId, &youtubePath)
+		err = row.Scan(&id)
 		if err != nil {
 			panic(err)
 		}
-		music := Music{
-			Id:          id,
-			Name:        name,
-			ArtisteId:   artisteId,
-			AlbumId:     albumId,
-			YoutubePath: youtubePath,
+		music = append(music, id)
+
+	}
+	for _, id := range music {
+		stmt, err := db.Prepare("INSERT INTO scoreMusic (musicId, accountId,score) VALUES (?,?,?)")
+		if err != nil {
+			panic(err)
 		}
-		AllMusic = append(AllMusic, music)
+		defer stmt.Close()
+		_, err = stmt.Exec(id, accountId, 50)
+		if err != nil {
+			panic(err)
+		}
 	}
 
-	row, err = db.Query("SELECT id,name,artisteId,youtubePath  FROM album")
+	var album []int
+	row, err = db.Query("SELECT id FROM album")
 	if err != nil {
 		panic(err)
 	}
 	for row.Next() {
+
 		var id int
-		var name string
-		var artisteId int
-		var youtubePath string
-		err = row.Scan(&id, &name, &artisteId, &youtubePath)
+		err = row.Scan(&id)
 		if err != nil {
 			panic(err)
 		}
-		album := Album{
-			Id:          id,
-			Name:        name,
-			ArtisteId:   artisteId,
-			YoutubePath: youtubePath,
-		}
-		AllAlbums = append(AllAlbums, album)
+		album = append(album, id)
+
 	}
-	row, err = db.Query("SELECT id,name  FROM artist")
+	for _, id := range album {
+		stmt, err := db.Prepare("INSERT INTO scoreAlbum (albumId, accountId,score) VALUES (?,?,?)")
+		if err != nil {
+			panic(err)
+		}
+		defer stmt.Close()
+		_, err = stmt.Exec(id, accountId, 50)
+		if err != nil {
+			panic(err)
+		}
+	}
+	var artist []int
+	row, err = db.Query("SELECT id FROM artist")
 	if err != nil {
 		panic(err)
 	}
 	for row.Next() {
+
 		var id int
-		var name string
-		err = row.Scan(&id, &name)
+		err = row.Scan(&id)
 		if err != nil {
 			panic(err)
 		}
-		artist := Artist{
-			Id:   id,
-			Name: name,
-		}
-		AllArtists = append(AllArtists, artist)
+		artist = append(artist, id)
+
 	}
-	row, err = db.Query("SELECT id,name  FROM genre")
+	for _, id := range artist {
+		stmt, err := db.Prepare("INSERT INTO scoreArtiste (artisteId, accountId,score) VALUES (?,?,?)")
+		if err != nil {
+			panic(err)
+		}
+		defer stmt.Close()
+		_, err = stmt.Exec(id, accountId, 50)
+		if err != nil {
+			panic(err)
+		}
+	}
+	var genre []int
+	row, err = db.Query("SELECT id FROM genre")
 	if err != nil {
 		panic(err)
 	}
 	for row.Next() {
+
 		var id int
-		var name string
-		err = row.Scan(&id, &name)
+		err = row.Scan(&id)
 		if err != nil {
 			panic(err)
 		}
-		genre := Genre{
-			Id:   id,
-			Name: name,
+		genre = append(genre, id)
+
+	}
+	for _, id := range genre {
+		stmt, err := db.Prepare("INSERT INTO scoreGenre (genreId, accountId,score) VALUES (?,?,?)")
+		if err != nil {
+			panic(err)
 		}
-		AllGenres = append(AllGenres, genre)
+		defer stmt.Close()
+		_, err = stmt.Exec(id, accountId, 50)
+		if err != nil {
+			panic(err)
+		}
 	}
 
 }
