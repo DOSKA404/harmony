@@ -1,56 +1,75 @@
 package data
 
-import "errors"
+import (
+	"database/sql"
+	"errors"
+	"fmt"
+)
 
-func AddAccount(username string, pasword string) (Account, error) {
+func AddAccount(username string, password string) (Account, error) {
 	var account Account
-	db := OpenDb()
+	db, err := sql.Open("sqlite3", "db/data.sqlite")
+	if err != nil {
+		fmt.Println("ici", err)
+		return Account{}, err
+	}
+	defer db.Close()
 
 	row, err := db.Query("SELECT username FROM account WHERE username = ?", username)
 	if err != nil {
-		panic(err)
+		fmt.Println("ici", err)
+		return Account{}, err
 	}
 
 	for row.Next() {
 		var name string
-		err = row.Scan(&name)
-		if err != nil {
-			panic(err)
+		if err := row.Scan(&name); err != nil {
+			return Account{}, err
 		}
 		if name == username {
 			return Account{}, errors.New("Username already exists")
 		}
 	}
 
-	stmt, err := db.Prepare("INSERT INTO Account (username, password) VALUES (?,?)")
+	stmt, err := db.Prepare("INSERT INTO account (username, password) VALUES (?,?)")
 	if err != nil {
-		panic(err.Error())
+		return Account{}, err
 	}
 	defer stmt.Close()
-	db = OpenDb()
-	row, err = db.Query("SELECT id,username FROM account WHERE username = ?", username)
+
+	_, err = stmt.Exec(username, password)
 	if err != nil {
-		panic(err)
+		return Account{}, err
 	}
+
+	// Retrieve the newly inserted account
+	row, err = db.Query("SELECT id, username FROM account WHERE username = ?", username)
+	if err != nil {
+		return Account{}, err
+	}
+	defer row.Close()
 
 	for row.Next() {
 		var id int
 		var name string
-		err = row.Scan(&id, &name)
-		if err != nil {
-			panic(err)
+		if err := row.Scan(&id, &name); err != nil {
+			return Account{}, err
 		}
 		account = Account{
 			Id:       id,
 			Username: name,
 		}
 	}
-	return account, nil
 
+	return account, nil
 }
 
 func InitScore(accountId int) {
-	db := OpenDb()
+	db, err := sql.Open("sqlite3", "db/data.sqlite")
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
 
 	row, err := db.Query("SELECT id, name, artisteId, albumId, youtubePath  FROM music")
 	if err != nil {
@@ -132,4 +151,37 @@ func InitScore(accountId int) {
 		AllGenres = append(AllGenres, genre)
 	}
 
+}
+
+func VerifAccount(username string, password string) (Account, error) {
+	var account Account
+	db, err := sql.Open("sqlite3", "db/data.sqlite")
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+
+	row, err := db.Query("SELECT id, username FROM account WHERE username = ? AND password = ?", username, password)
+	if err != nil {
+		return Account{}, err
+	}
+	defer row.Close()
+
+	for row.Next() {
+		var id int
+		var name string
+		if err := row.Scan(&id, &name); err != nil {
+			return Account{}, err
+		}
+		account = Account{
+			Id:       id,
+			Username: name,
+		}
+	}
+
+	if account.Username == "" {
+		return Account{}, errors.New("Username or password is incorrect")
+	}
+
+	return account, nil
 }
