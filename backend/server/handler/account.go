@@ -3,6 +3,7 @@ package handler
 import (
 	data "backend/data"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -27,6 +28,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fmt.Println(username)
 	jsonBytes, err := json.Marshal(account)
 	if err != nil {
 		http.Error(w, "Internal server error", http.StatusInternalServerError)

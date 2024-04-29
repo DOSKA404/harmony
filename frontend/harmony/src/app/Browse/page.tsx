@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, Text, useColorModeValue, SimpleGrid, Image } from '@chakra-ui/react';
-import { Layout } from '../../components/layout';
+import Header, { Layout } from '../../components/layout';
 import NextLink from 'next/link';
 
 const musicData = [
@@ -134,7 +134,9 @@ const musicData = [
 
 function Browse() {
   return (
+    
     <Layout>
+      <Header />
       <Box w="full" bg="black" minH="100vh">
         <Flex
           direction="column"

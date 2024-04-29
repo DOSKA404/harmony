@@ -57,7 +57,7 @@ export default function Login() {
 
   return (
     <Layout>
-      <Center w="full" h="100vh" bg="black">
+      <Center w="full" h="100vh" bg="#0A0F12">
         <Box p={8} w={['90%', '70%', '50%', '40%']} maxWidth="600px" borderWidth="1px" borderRadius="lg" boxShadow="lg" bgGradient="linear(to-r, #333333, #1a1a1a)">
           <form onSubmit={handleSubmit}>
             <VStack spacing={8} align="center">
