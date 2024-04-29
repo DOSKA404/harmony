@@ -38,3 +38,34 @@ func RecupAlbumContent(albumIdInt int) []Music {
 	return music
 
 }
+
+func RecupArtistContent(artistIdInt int) []Album {
+	db, err := sql.Open("sqlite3", "db/data.sqlite")
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+	rows, err := db.Query("SELECT * FROM album WHERE artisteId =?", artistIdInt)
+	if err != nil {
+		panic(err)
+	}
+	var album []Album
+	for rows.Next() {
+		var id int
+		var name string
+		var artisteId int
+		var youtubePath string
+		err = rows.Scan(&id, &name, &artisteId, &youtubePath)
+		if err != nil {
+			panic(err)
+		}
+		album = append(album, Album{
+			Id:          id,
+			Name:        name,
+			ArtisteId:   artisteId,
+			YoutubePath: youtubePath,
+		})
+	}
+	return album
+
+}
