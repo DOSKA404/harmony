@@ -133,3 +133,30 @@ func InitScore(accountId int) {
 	}
 
 }
+
+func VerifAccount(username string, password string) (Account, error) {
+	var account Account
+	db := OpenDb()
+
+	row, err := db.Query("SELECT id,username FROM account WHERE username = ? AND password = ?", username, password)
+	if err != nil {
+		panic(err)
+	}
+
+	for row.Next() {
+		var id int
+		var name string
+		err = row.Scan(&id, &name)
+		if err != nil {
+			panic(err)
+		}
+		account = Account{
+			Id:       id,
+			Username: name,
+		}
+	}
+	if account.Username == "" {
+		return Account{}, errors.New("Username or password is incorrect")
+	}
+	return account, nil
+}
