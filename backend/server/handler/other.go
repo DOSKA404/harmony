@@ -266,3 +266,32 @@ func ArtistContent(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write(jsonBytes)
 }
+
+func SearchBars(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Could not parse form", http.StatusBadRequest)
+		return
+	}
+
+	id := r.FormValue("id")
+	idInt, err := strconv.Atoi(id)
+	search := r.FormValue("search")
+
+	recomendation := logic.Search(idInt, search)
+
+	jsonBytes, err := json.Marshal(recomendation)
+	if err != nil {
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonBytes)
+}

@@ -57,3 +57,9 @@ type Recommendations struct {
 	Album  [4]Album
 	Artist [4]Artist
 }
+
+type ReturnStruct struct {
+	Music  []Music
+	Album  []Album
+	Artist []Artist
+}
