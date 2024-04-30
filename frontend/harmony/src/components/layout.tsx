@@ -28,17 +28,9 @@ export default function Header() {
       </NextLink>
     </Flex>
   </Box>
-  <Flex align="center" flex="1" mx={20}>
-    <Input
-      placeholder=" musiques, albums, artistes..."
-      variant="flushed"
-      size="sm"
-      focusBorderColor="teal.800"
-      _placeholder={{ color: 'rgba(255, 255, 255, 0.7)' }}
-    />
-  </Flex>
+
   <Flex align="center">
-    <NextLink href="/Browse" passHref>
+    <NextLink href="/Music" passHref>
       <Button
         as="a"
         size="md"
@@ -49,19 +41,6 @@ export default function Header() {
         mr={4}
       >
         Parcourir
-      </Button>
-    </NextLink>
-    <NextLink href="/Register" passHref>
-      <Button
-        as="a"
-        size="md"
-        backgroundColor="teal.700"
-        color="white"
-        _hover={{ backgroundColor: "teal.800" }}
-        _active={{ backgroundColor: "teal.900" }}
-        mr={4}
-      >
-        Mon Profil
       </Button>
     </NextLink>
     <NextLink href="/" passHref>

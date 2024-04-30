@@ -77,14 +77,14 @@ export default function Login() {
               <Button
                 type="submit"
                 size="lg"
-                backgroundColor="teal.700"  // Utilisation d'une couleur plus foncée
+                backgroundColor="teal.700"  
                 color="white"
                 _hover={{
-                  backgroundColor: "teal.800",  // Assombrissement lors du survol
-                  transform: 'scale(1.03)'  // Légère augmentation de la taille pour l'interaction
+                  backgroundColor: "teal.800",  
+                  transform: 'scale(1.03)'  
                 }}
                 _active={{
-                  backgroundColor: "teal.900"  // Encore plus sombre lors du clic
+                  backgroundColor: "teal.900"  
                 }}
                 mt={6}
                 px={10}

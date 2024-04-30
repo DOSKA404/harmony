@@ -82,8 +82,22 @@ export default function Register() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </FormControl>
-              <Button size="lg" backgroundColor="#47A8BD" mt={6} px={10} type="submit">
-                S'inscrire
+              <Button
+                type="submit"
+                size="lg"
+                backgroundColor="teal.700"  
+                color="white"
+                _hover={{
+                  backgroundColor: "teal.800",  
+                  transform: 'scale(1.03)'  
+                }}
+                _active={{
+                  backgroundColor: "teal.900"  
+                }}
+                mt={6}
+                px={10}
+              >
+                S inscrire
               </Button>
               <Flex mt={4} align="center" justify="center">
                 <Text color="whiteAlpha.800" mr={2}>Déjà un compte ?</Text>
